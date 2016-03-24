@@ -15,7 +15,6 @@ angular.module('rodelloApp', [])
         $scope.addCard = function() {
         	count++;
             $scope.cards.push(cardName + count);
-            $scope.cardTitle = 'Story'+ count ;
         }
 
         $scope.enableEditor = function() {
@@ -28,6 +27,7 @@ angular.module('rodelloApp', [])
             $('#edit-wrap').hide();
             $('.options, #card-name').show();
         };
+
 
         /*$scope.editName = function(){
             $('#update-card-name').show();
