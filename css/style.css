@@ -132,12 +132,21 @@
 #card-name,
 #edit-wrap {float: left;}
 #edit-wrap {display: none;}
+#card-name {display: block;}
+
 #edit-wrap input {
-  color:  #333;
+  background: rgba(255,255,255, 0.2);
+  color: #fff;
+  border: none;
+  padding: 4px 10px
+  font-size: 13px;
 }
 #edit-wrap input:focus {
   box-shadow: none;
+  outline: none;
+  border: none;
 }
+
 #select-color li {
   margin: 0 5px;
 }

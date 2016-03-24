@@ -15,7 +15,7 @@ angular.module('rodelloApp', [])
         $scope.addCard = function() {
         	count++;
             $scope.cards.push(cardName + count);
-            $('#card-name').show();
+            $scope.cardTitle = 'Story'+ count ;
         }
 
         $scope.enableEditor = function() {
