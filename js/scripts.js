@@ -22,6 +22,13 @@ angular.module('rodelloApp', [])
             $('#btn-edit').hide();
             /*$event.preventDefault();*/
         }
+
+        /*$scope.hideOptions = function(){
+        	$('.actions').hide();
+        }
+        $scope.showOptions = function(){
+        	$('.actions').show();
+        }*/
 });
 
 

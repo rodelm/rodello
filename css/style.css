@@ -100,7 +100,7 @@
     width:200px;
 }
 
-/* draggable cards */
+/*--------------- cards ----------------*/
 #sortableLogs,
 #sortableProgress,
 #sortableDone {
@@ -132,3 +132,32 @@
 #card-name,
 #update-card-name {float: left;}
 #update-card-name {display: none;}
+#select-color li {
+  margin: 0 5px;
+}
+#select-color li a {
+  height: 18px;
+}
+
+
+/*--------------- overrides ----------------*/
+.card-entry .btn-default {
+  border: none;
+  background: none;
+  color: #fff;
+  padding: 0;
+}
+.dropdown-menu {
+  right: 0!important;
+  margin-top: 0;
+  min-width: 100px;
+}
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+  color: #dadada;
+  background: none;
+  border: none;
+}
+
+
+/*--------------- helpers ----------------*/
+.pl10 {padding-left: 10px;}
