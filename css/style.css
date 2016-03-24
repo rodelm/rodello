@@ -1,0 +1,134 @@
+.navbar-inverse .navbar-brand {
+  color: #fff;
+  font-size: 23px;
+}
+.boxes-wrap {
+  background-color: #eee;
+  height: 100vh;
+}
+.box {
+  background-color: #fff;
+  border-radius: 4px 4px 4px 4px;
+  height: 80vh;
+  margin-top: 80px;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  -webkit-box-shadow: 0 1px 3px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px 1px rgba(0,0,0,0.1);
+  padding: 20px;
+  position: relative;
+}
+.box-header {
+  margin: 0 0 10px 0;
+}
+.box-body {
+  overflow: auto;
+  max-height: 92%;
+}
+.box-footer {
+  height: 20px;
+  background-color: #fff;
+  position: relative;
+  bottom: 0px;
+}
+.box h4 {
+  font-weight: 700;
+  display: inline-block;
+  margin: 0;
+}
+.card-entry {
+  background-color: #265a88;
+  border-radius: 3px 3px 3px 3px;
+  color: #fff;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  position: relative;
+}
+.card-actions {
+  position: absolute;
+  right: 0;
+  top: 8px;
+}
+.card-actions a {
+  /*color: #fff;*/
+  display: inline-block;
+}
+.card-entry .dropdown {
+  display: inline-block;
+}
+.card-entry p {
+  margin: 0;
+}
+.blue   {background-color: #265a88;}
+.red    {background-color: #c12e2a;}
+.green  {background-color: #419641;}
+.yellow {background-color: #eb9316;}
+
+.trash-area {
+  background-color: rgba(255, 255, 255, 0.9);
+  bottom: 0;
+  height: 150px;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+}
+.trash-area h4 {
+  margin-top: 0px;
+}
+.draggable {
+   display:inline-block;
+   border:1px solid blue;
+   height: 22px;
+   width: 25px;
+   margin-right: 1px;
+   text-align: center;
+   vertical-align: center;
+}
+.droppable {
+    position: absolute;
+    border:1px solid black;
+    height:100px;
+    width:200px;
+    display:inline-block;
+    margin-left:50px;
+    text-align: right;
+}
+.bottom {
+    position: absolute;
+    bottom: 0;
+    height:25px;
+    width:200px;
+}
+
+/* draggable cards */
+#sortableLogs,
+#sortableProgress,
+#sortableDone {
+  min-height: 200px;
+}
+.ui-sortable-placeholder {
+  background-color: #e1e1e1;
+  height: 40px;
+  border-radius: 3px;
+}
+.ui-sortable-helper {
+  -ms-transform: rotate(3deg); 
+    -webkit-transform: rotate(3deg); 
+    transform: rotate(3deg);
+}
+.card-entry:hover {
+  cursor: pointer;
+}
+.card-entry a {
+  color: #fff;
+}
+#btn-save {
+  background: none;
+  border: none;
+}
+#update-card-name {
+  width: 100%;
+}
+#card-name,
+#update-card-name {float: left;}
+#update-card-name {display: none;}
