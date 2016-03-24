@@ -50,12 +50,8 @@
             </div>
             <div class="box-body clearfix">
               <div class="connectedSortable" id="sortableLogs">
-                
                 <div class="clearfix card-entry blue" 
-                  ng-repeat="card in cards track by $index"
-                  ng-mouseenter="showOptions = true" 
-                  ng-mouseleave="showOptions = false"
-                >
+                  ng-repeat="card in cards track by $index" ng-mouseenter="showOptions = true" ng-mouseleave="showOptions = false" ng-style="cardColor">
                   <p id="card-name" ng-bind="cardTitle">{{ card }}</p>
                   <div class="clearfix" id="edit-wrap" >
                     <input type="text" class="pull-left" ng-model="cardTitle" >
@@ -63,25 +59,23 @@
                       <span class="glyphicon glyphicon-floppy-disk"></span>
                     </button>  
                   </div>
-                  
                   <div class="pull-right options" ng-show="showOptions">
                     <a id="btn-edit-name" href="" ng-click="enableEditor()">
                       <span class="glyphicon glyphicon-pencil"></span>
                     </a>
-                    <div class="dropdown pl10">
+                    <div class="dropdown pl15">
                       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="glyphicon glyphicon-tasks"></span>
                       </button>
                       <ul class="dropdown-menu pull-right" id="select-color">
-                        <li><a href="" class="blue" ng-click="setCardColor('blue')"></a></li>
-                        <li><a href="" class="green" ng-click="setCardColor('green')"></a></li>
-                        <li><a href="" class="yellow" ng-click="setCardColor('yellow')"></a></li>
-                        <li><a href="" class="red" ng-click="setCardColor('red')"></a></li>
+                        <li class="blue" ng-click="cardColor={background:'#265a88'}"></li>
+                        <li class="green" ng-click="cardColor={background:'#419641'}"></li>
+                        <li class="yellow" ng-click="cardColor={background:'#eb9316'}"></li>
+                        <li class="red" ng-click="cardColor={background:'#c12e2a'}"></li>
                       </ul>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -94,37 +88,32 @@
             </div>
             <div class="box-body clearfix">
               <div class="connectedSortable" id="sortableLogs">
-                
                 <div class="clearfix card-entry blue" 
-                  ng-repeat="card in cards track by $index"
-                  ng-mouseenter="showOptions = true" 
-                  ng-mouseleave="showOptions = false"
-                >
-                  <p id="card-name">{{ card }}</p>
-                  <form class="clearfix" id="update-card-name" ng-submit="updateCardName">
-                    <input type="text" class="pull-left">
-                    <button id="btn-save" class="pull-right" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span></button>  
-                  </form>
-                  
-                  <div class="pull-right actions" ng-show="showOptions">
-                    <a id="btn-edit-name" href="" ng-click="editName()">
+                  ng-repeat="card in cards track by $index" ng-mouseenter="showOptions = true" ng-mouseleave="showOptions = false" ng-style="cardColor">
+                  <p id="card-name" ng-bind="cardTitle">{{ card }}</p>
+                  <div class="clearfix" id="edit-wrap" >
+                    <input type="text" class="pull-left" ng-model="cardTitle" >
+                    <button id="btn-save" class="pull-right" type="submit" ng-click="save()">
+                      <span class="glyphicon glyphicon-floppy-disk"></span>
+                    </button>  
+                  </div>
+                  <div class="pull-right options" ng-show="showOptions">
+                    <a id="btn-edit-name" href="" ng-click="enableEditor()">
                       <span class="glyphicon glyphicon-pencil"></span>
                     </a>
-                    <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <div class="dropdown pl15">
+                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="glyphicon glyphicon-tasks"></span>
                       </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                      <ul class="dropdown-menu pull-right" id="select-color">
+                        <li class="blue" ng-click="cardColor={background:'#265a88'}"></li>
+                        <li class="green" ng-click="cardColor={background:'#419641'}"></li>
+                        <li class="yellow" ng-click="cardColor={background:'#eb9316'}"></li>
+                        <li class="red" ng-click="cardColor={background:'#c12e2a'}"></li>
                       </ul>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -136,12 +125,32 @@
               <button class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <div class="box-body clearfix">
-              <div class="connectedSortable" id="sortableDone">
-                <div id="" class="card-entry green">
-                  <p>Story 1</p>
-                </div>
-                <div id="" class="card-entry green">
-                  <p>Story 2</p>
+              <div class="connectedSortable" id="sortableLogs">
+                <div class="clearfix card-entry blue" 
+                  ng-repeat="card in cards track by $index" ng-mouseenter="showOptions = true" ng-mouseleave="showOptions = false" ng-style="cardColor">
+                  <p id="card-name" ng-bind="cardTitle">{{ card }}</p>
+                  <div class="clearfix" id="edit-wrap" >
+                    <input type="text" class="pull-left" ng-model="cardTitle" >
+                    <button id="btn-save" class="pull-right" type="submit" ng-click="save()">
+                      <span class="glyphicon glyphicon-floppy-disk"></span>
+                    </button>  
+                  </div>
+                  <div class="pull-right options" ng-show="showOptions">
+                    <a id="btn-edit-name" href="" ng-click="enableEditor()">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <div class="dropdown pl15">
+                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-tasks"></span>
+                      </button>
+                      <ul class="dropdown-menu pull-right" id="select-color">
+                        <li class="blue" ng-click="cardColor={background:'#265a88'}"></li>
+                        <li class="green" ng-click="cardColor={background:'#419641'}"></li>
+                        <li class="yellow" ng-click="cardColor={background:'#eb9316'}"></li>
+                        <li class="red" ng-click="cardColor={background:'#c12e2a'}"></li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -43,6 +43,7 @@
   padding: 10px 20px;
   margin: 10px 0;
   position: relative;
+  height: 44px;
 }
 .card-actions {
   position: absolute;
@@ -59,10 +60,11 @@
 .card-entry p {
   margin: 0;
 }
-.blue   {background-color: #265a88;}
-.red    {background-color: #c12e2a;}
-.green  {background-color: #419641;}
-.yellow {background-color: #eb9316;}
+.blue, .blue:hover      {background-color: #265a88;}
+.red, .red:hover        {background-color: #c12e2a;}
+.green, .green:hover    {background-color: #419641;}
+.yellow, .yellow:hover  {background-color: #eb9316;}
+
 
 .trash-area {
   background-color: rgba(255, 255, 255, 0.9);
@@ -117,6 +119,9 @@
     transform: rotate(3deg);
 }
 .card-entry:hover {
+  cursor: move;
+}
+.card-entry #select-color li:hover {
   cursor: pointer;
 }
 .card-entry a {
@@ -132,20 +137,32 @@
 #card-name,
 #edit-wrap {float: left;}
 #edit-wrap {display: none;}
+#card-name {display: block;}
+
 #edit-wrap input {
-  color:  #333;
+  background: rgba(255,255,255, 0.2);
+  color: #fff;
+  border: none;
+  padding: 0px 5px;
+  font-size: 15px;
+  width: 80%;
 }
 #edit-wrap input:focus {
   box-shadow: none;
+  outline: none;
+  border: none;
 }
+
 #select-color li {
   margin: 0 5px;
 }
-#select-color li a {
-  height: 18px;
+#select-color li a,
+#select-color li {
+  height: 23px;
 }
 #btn-edit-name, .card-entry .dropdown .btn-default {
-  font-size: 11px;
+  font-size: 12px;
+  padding: 0 5px;
 }
 
 
@@ -165,11 +182,15 @@
 }
 .btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default,
 .open>.dropdown-toggle.btn-default:hover {
-  color: #dadada;
+  color: #fff;
   background: none;
   border: none;
+  background-color: transparent;
+}
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+  background: none;
 }
 
 
 /*--------------- helpers ----------------*/
-.pl10 {padding-left: 10px;}
+.pl5 {padding-left: 5px;}
