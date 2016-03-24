@@ -164,6 +164,9 @@
   font-size: 12px;
   padding: 0 5px;
 }
+.box input[type="text"] {
+  color: #333;
+}
 
 
 /*--------------- overrides ----------------*/

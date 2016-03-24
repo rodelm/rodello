@@ -46,21 +46,25 @@
           <div class="box" ng-controller="cardController">
             <div class="box-header clearfix">
               <h4>BACKLOG</h4>
-              <button ng-click="addCard()" class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+              <button ng-click="addBacklog()" class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <div class="box-body clearfix">
               <div class="connectedSortable" id="sortableLogs">
                 <div class="clearfix card-entry blue" 
-                  ng-repeat="card in cards track by $index" ng-mouseenter="showOptions = true" ng-mouseleave="showOptions = false" ng-style="cardColor">
-                  <p id="card-name" ng-bind="cardTitle">{{ card }}</p>
-                  <div class="clearfix" id="edit-wrap" >
-                    <input type="text" class="pull-left" ng-model="cardTitle" >
-                    <button id="btn-save" class="pull-right" type="submit" ng-click="save()">
+                  ng-repeat="card in backlogCards track by $index" 
+                  ng-mouseenter="showOptions = true" 
+                  ng-mouseleave="showOptions = false" 
+                  ng-style="cardColor">
+                  <p id="card-name" class="backlog-{{$index}}">{{ backlogCards[$index] }}</p>
+                  <div class="clearfix" ng-show="showEdit">
+                    <input type="text" class="pull-left backlog-input-{{ $index }}" ng-model="backlogCards[$index]" >
+                    <button id="btn-save" class="pull-right backlog-input-{{ $index }}" type="submit" ng-click="save($index); showEdit = false">
                       <span class="glyphicon glyphicon-floppy-disk"></span>
                     </button>  
                   </div>
                   <div class="pull-right options" ng-show="showOptions">
-                    <a id="btn-edit-name" href="" ng-click="enableEditor()">
+                    <a id="btn-edit-name" href="" 
+                      ng-click="enableEditor($index); showEdit = true">
                       <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                     <div class="dropdown pl15">
@@ -90,7 +94,7 @@
               <div class="connectedSortable" id="sortableLogs">
                 <div class="clearfix card-entry blue" 
                   ng-repeat="card in cards track by $index" ng-mouseenter="showOptions = true" ng-mouseleave="showOptions = false" ng-style="cardColor">
-                  <p id="card-name" ng-bind="cardTitle">{{ card }}</p>
+                  <p id="card-name" ng-bind="cardTitle"></p>
                   <div class="clearfix" id="edit-wrap" >
                     <input type="text" class="pull-left" ng-model="cardTitle" >
                     <button id="btn-save" class="pull-right" type="submit" ng-click="save()">
@@ -128,7 +132,7 @@
               <div class="connectedSortable" id="sortableLogs">
                 <div class="clearfix card-entry blue" 
                   ng-repeat="card in cards track by $index" ng-mouseenter="showOptions = true" ng-mouseleave="showOptions = false" ng-style="cardColor">
-                  <p id="card-name" ng-bind="cardTitle">{{ card }}</p>
+                  <p id="card-name" ng-bind="cardTitle"></p>
                   <div class="clearfix" id="edit-wrap" >
                     <input type="text" class="pull-left" ng-model="cardTitle" >
                     <button id="btn-save" class="pull-right" type="submit" ng-click="save()">
@@ -171,6 +175,7 @@
     <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
     
