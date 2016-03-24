@@ -56,25 +56,27 @@
                   ng-mouseenter="showOptions = true" 
                   ng-mouseleave="showOptions = false"
                 >
-                  <p id="card-name">{{ card }}</p>
-                  <form class="clearfix" id="update-card-name" ng-submit="updateCardName">
-                    <input type="text" class="pull-left">
-                    <button id="btn-save" class="pull-right" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span></button>  
-                  </form>
+                  <p id="card-name" ng-bind="cardTitle">{{ card }}</p>
+                  <div class="clearfix" id="edit-wrap" >
+                    <input type="text" class="pull-left" ng-model="cardTitle" >
+                    <button id="btn-save" class="pull-right" type="submit" ng-click="save()">
+                      <span class="glyphicon glyphicon-floppy-disk"></span>
+                    </button>  
+                  </div>
                   
-                  <div class="pull-right actions" ng-show="showOptions">
-                    <a id="btn-edit-name" href="" ng-click="editName()">
+                  <div class="pull-right options" ng-show="showOptions">
+                    <a id="btn-edit-name" href="" ng-click="enableEditor()">
                       <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                     <div class="dropdown pl10">
                       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="glyphicon glyphicon-tasks"></span>
                       </button>
-                      <ul class="dropdown-menu" id="select-color">
-                        <li><a href="#" class="blue"></a></li>
-                        <li><a href="#" class="green"></a></li>
-                        <li><a href="#" class="yellow"></a></li>
-                        <li><a href="#" class="red"></a></li>
+                      <ul class="dropdown-menu pull-right" id="select-color">
+                        <li><a href="" class="blue" ng-click="setCardColor('blue')"></a></li>
+                        <li><a href="" class="green" ng-click="setCardColor('green')"></a></li>
+                        <li><a href="" class="yellow" ng-click="setCardColor('yellow')"></a></li>
+                        <li><a href="" class="red" ng-click="setCardColor('red')"></a></li>
                       </ul>
                     </div>
                   </div>

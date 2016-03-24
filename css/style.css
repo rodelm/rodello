@@ -126,17 +126,26 @@
   background: none;
   border: none;
 }
-#update-card-name {
+#edit-wrap {
   width: 100%;
 }
 #card-name,
-#update-card-name {float: left;}
-#update-card-name {display: none;}
+#edit-wrap {float: left;}
+#edit-wrap {display: none;}
+#edit-wrap input {
+  color:  #333;
+}
+#edit-wrap input:focus {
+  box-shadow: none;
+}
 #select-color li {
   margin: 0 5px;
 }
 #select-color li a {
   height: 18px;
+}
+#btn-edit-name, .card-entry .dropdown .btn-default {
+  font-size: 11px;
 }
 
 
@@ -147,12 +156,15 @@
   color: #fff;
   padding: 0;
 }
+.card-entry a:hover {
+  text-decoration: none;
+}
 .dropdown-menu {
-  right: 0!important;
   margin-top: 0;
   min-width: 100px;
 }
-.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default,
+.open>.dropdown-toggle.btn-default:hover {
   color: #dadada;
   background: none;
   border: none;
