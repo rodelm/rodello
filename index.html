@@ -47,6 +47,7 @@
                 <div class="box-header clearfix">
                   <h4>{{ listName }}</h4>
                   <button ng-click="addCard(listName)" class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                  <button ng-click="clearBoard(listName)" class="mr5 pull-right btn btn-xs btn-default "> <span class="glyphicon glyphicon-erase"></span>Clear Board</button>
                 </div>
                 <div class="box-body clearfix">
                   <ul dnd-list="list">
@@ -82,17 +83,17 @@
                             <span class="glyphicon glyphicon-tasks"></span>
                           </button>
 
-                          <ul class="dropdown-menu pull-right" id="select-color" 
-                            ng-model="item.color"
-                            ng-show="colorEnabled"
-                            ng-hide="showOptions"
-                          >
-                            <li><a ng-click="toggleBox()" href="" class="blue" value="blue" ng-model="item.color"></a></li>
-                            <li><a ng-click="toggleBox()" href="" class="green" value="green" ng-model="item.color"></a></li>
-                            <li><a ng-click="toggleBox()" href="" class="yellow" value="yellow" ng-model="item.color"></a></li>
-                            <li><a ng-click="toggleBox()" href="" class="red" value="red" ng-model="item.color"></a></li>
+                          <ul class="dropdown-menu pull-right" id="select-color" ng-show="colorEnabled" ng-hide="showOptions">
+                            <li><a href="" class="blue"   ng-click="changeColor('DarkBlue', $index)"></a></li>
+                            <li><a href="" class="green"  ng-click="changeColor('ForestGreen', $index)"></a></li>
+                            <li><a href="" class="yellow" ng-click="changeColor('GoldenRod ', $index)"></a></li>
+                            <li><a href="" class="red"    ng-click="changeColor('FireBrick', $index)"></a></li>
                           </ul>
                         </div>
+                        <a id="btn-edit-name" href="" 
+                          ng-click="moveToTrash(listName, item, $index)">
+                          <span class="glyphicon glyphicon-trash"></span>
+                        </a>
                       </div>
                     </li>
                   </ul>
@@ -117,11 +118,23 @@
     </div>
   </div>
 
-    <!-- <div class="trash-area">
-      <div class="">
-          <h4>Trash</h4>
-      </div>
-    </div> -->
+  <div class="trash-area">
+    <div class="">
+      <h4>Trash</h4>
+      
+      
+      <div ng-repeat="items in models.trashItems">
+            <ul class="cards">
+                <li class="card" ng-repeat="item in items">
+                    <p>{{item.label}}</p>
+                    <ul class="actions">
+                        <li><a href="#" ng-click="permanentlyDelete($index)"></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-drag-and-drop-lists.min.js"></script>
     <script type="text/javascript" src="js/angular-route.min.js"></script>

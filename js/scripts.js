@@ -51,8 +51,7 @@ angular.module("rodelloApp").controller("CardController", [ "$scope", "$localSto
         trashItems: {
             items: []
         },
-        storyCounter: 0,
-        firstTime: true
+        storyCounter: 0
     });
     $scope.models = {
         selected: null,
@@ -62,21 +61,32 @@ angular.module("rodelloApp").controller("CardController", [ "$scope", "$localSto
     };
 
     // add new card to boxes + assign colors
-    $scope.color = "blue";
+    $scope.color = "DarkBlue";
     $scope.addCard = function(columnName) {
         $scope.$storage.lists[columnName].push({
             label: "Story " + ++$scope.$storage.storyCounter,
-            color: "blue"
+            color: "DarkBlue"
         });
     };
-    //Toggle color chooser
+
+    //toggle color chooser
     $scope.IsHidden = true;
     $scope.ShowHide = function () {
         //If DIV is hidden it will be visible and vice versa.
         $scope.IsHidden = $scope.IsHidden ? false : true;
     };
+    $scope.changeColor = function (color, $index) {
+        items[$index].color = color;
+        console.log(items[$index].color);
+    };
 
-    //Pressing 'archive' on a story moves the item to the bottom Trash
+    $scope.moveToTrash = function(columnName, label) {
+        $scope.models.trashItems.items.push({
+            label: label,
+            column: columnName
+        });
+    };
+    //move to trash
     $scope.moveToTrash = function(columnName, item, index) {
         item.column = columnName;
         console.log(item);
@@ -94,9 +104,6 @@ angular.module("rodelloApp").controller("CardController", [ "$scope", "$localSto
         delete $scope.$storage.trashItems["items"].splice(index, 1);
     };
 
-    $scope.changeColor = function(idx, columnName) {
-        alert(idx + columnName);
-    };
     $scope.clearBoard = function(columnName) {
         $scope.$storage.lists[columnName] = [];
     };
