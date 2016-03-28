@@ -80,6 +80,8 @@
   position: absolute;
   width: 100%;
   left: 0;
+  -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.3);
 }
 .trash-area h4 {
   margin-top: 0px;

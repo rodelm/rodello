@@ -13,6 +13,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="css/joyride-2.1.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -38,18 +39,18 @@
     <div class="boxes-wrap row" ng-controller="CardController">
       <div class="container-fluid">
 
-      <div class="col-md-12 rel" id="board-wrap">
+      <div class="col-md-12 rel" id="board-wrap" id="joyRideTipContent">
           <div class="clearfix">
             <div ng-repeat="(listName, list) in models.lists"  class="col-md-4 col-sm-4 col-xs-12">
               <div class="box">
                 <div class="box-header clearfix">
-                  <h4>{{ listName }}</h4>
-                  <button ng-click="addCard(listName)" class="pull-right btn btn-md btn-primary"><span class="glyphicon glyphicon-plus mr5 "></span>Add</button>
-                  <button ng-click="clearBoard(listName)" class="mr5 pull-right btn btn-md btn-default "> <span class="glyphicon glyphicon-erase mr5"></span>Clear</button>
+                  <h4 id="tour1">{{ listName }}</h4>
+                  <button id="tour2" ng-click="addCard(listName)" class="pull-right btn btn-md btn-primary"><span class="glyphicon glyphicon-plus mr5 "></span>Add</button>
+                  <button id="tour3" ng-click="clearBoard(listName)" class="mr5 pull-right btn btn-md btn-default "> <span class="glyphicon glyphicon-erase mr5"></span>Clear</button>
                 </div>
                 <div class="box-body clearfix">
                   <ul class="box-body" dnd-list="list">
-                    <li class="card-entry" 
+                    <li id="tour4" class="card-entry" 
                       dnd-draggable="item"
                       dnd-moved="list.splice($index, 1)"
                       dnd-effect-allowed="move"
@@ -100,7 +101,7 @@
         </div>
         <div class="abs trash-area">
           <div class="clearfix">
-            <h4 class="pull-left">Trash items</h4>
+            <h4 class="pull-left" id="tour5">Trash items</h4>
           </div>
           <div class="" ng-repeat="items in models.trashItems">
             <div class="trash-cards col-md-2 col-sm-2 col-xs-6" ng-repeat="item in items">
@@ -116,15 +117,54 @@
       </div>
     </div>
   </div>
+
+  <!-- Tip Content -->
+    <ol id="joyRideTipContent">
+      <li data-id="tour1" data-text="Next" class="custom">
+        <h4>Backlog</h4>
+        <p>You can add Cards for your Backlog tasks here</p>
+      </li>
+      <li data-id="tour2" data-text="Next" class="custom">
+        <h4>Add New Cards</h4>
+        <p>Add a card that designates your tasks, You can drag and drop cards in order or priority</p>
+      </li>
+      <li data-id="tour3" data-text="Next" class="custom">
+        <h4>Clear Board</h4>
+        <p>You can clear all the cards in the board</p>
+      </li>
+      <li data-id="tour4" data-text="Next" class="custom">
+        <h4>Delete a card</h4>
+        <p>Once this card is deleted, this will be in your Trash Area</p>
+      </li>
+      <li data-id="tour5" data-text="Next" data-options="tipLocation:top;tipAnimation:fade">
+        <h4>Trash Area</h4>
+        <p>These are the cards deleted in from your Task Boards, click Purge to put it into oblivion</p>
+      </li>
+    </ol>
   
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-drag-and-drop-lists.min.js"></script>
     <script type="text/javascript" src="js/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
-    <!-- jquery is added for the purpose of dropdown buttons only -->
-    <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!-- app tour -->
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.joyride-2.1.js"></script>
+    <script>
+      $(window).load(function() {
+        $('#joyRideTipContent').joyride({
+          autoStart : true,
+          postStepCallback : function (index, tip) {
+          if (index == 2) {
+            $(this).joyride('set_li', false, 1);
+          }
+        },
+        modal:true,
+        expose: true
+        });
+      });
+    </script>
+
     
   </body>
 </html>
