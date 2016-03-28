@@ -38,19 +38,18 @@
     <div class="boxes-wrap row" ng-controller="CardController">
       <div class="container-fluid">
 
-      <div class="col-md-12">
+      <div class="col-md-12 rel" id="board-wrap">
           <div class="clearfix">
             <div ng-repeat="(listName, list) in models.lists"  class="col-md-4 col-sm-4 col-xs-12">
               <div class="box">
                 <div class="box-header clearfix">
                   <h4>{{ listName }}</h4>
-                  <button ng-click="addCard(listName)" class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
-                  <button ng-click="clearBoard(listName)" class="mr5 pull-right btn btn-xs btn-default "> <span class="glyphicon glyphicon-erase"></span>Clear Board</button>
+                  <button ng-click="addCard(listName)" class="pull-right btn btn-md btn-primary"><span class="glyphicon glyphicon-plus mr5 "></span>Add</button>
+                  <button ng-click="clearBoard(listName)" class="mr5 pull-right btn btn-md btn-default "> <span class="glyphicon glyphicon-erase mr5"></span>Clear</button>
                 </div>
                 <div class="box-body clearfix">
-                  <ul dnd-list="list">
-                    <li class="card-entry blue" 
-                      ng-repeat="item in list"
+                  <ul class="box-body" dnd-list="list">
+                    <li class="card-entry" 
                       dnd-draggable="item"
                       dnd-moved="list.splice($index, 1)"
                       dnd-effect-allowed="move"
@@ -60,7 +59,6 @@
                       ng-mouseleave="showOptions = false" 
                       style="background-color:{{item.color}}"
                       ng-repeat="item in list | filter: query"
-
                     >
                       <p ng-hide="editorEnabled" id="card-name">{{item.label}}</p>
                       <div class="clearfix" ng-show="editorEnabled">
@@ -82,10 +80,10 @@
                           </button>
 
                           <ul class="dropdown-menu pull-right" id="select-color" ng-show="colorEnabled" ng-hide="showOptions">
-                            <li><a href="" class="blue"   ng-click="changeColor('DarkBlue', $index)"></a></li>
-                            <li><a href="" class="green"  ng-click="changeColor('ForestGreen', $index)"></a></li>
-                            <li><a href="" class="yellow" ng-click="changeColor('GoldenRod ', $index)"></a></li>
-                            <li><a href="" class="red"    ng-click="changeColor('FireBrick', $index)"></a></li>
+                            <li><a href="" class="blue"   ng-click="changeColor(listName, 'DarkBlue', $index)"></a></li>
+                            <li><a href="" class="green"  ng-click="changeColor(listName, 'ForestGreen', $index)"></a></li>
+                            <li><a href="" class="yellow" ng-click="changeColor(listName, 'GoldenRod ', $index)"></a></li>
+                            <li><a href="" class="red"    ng-click="changeColor(listName, 'FireBrick', $index)"></a></li>
                           </ul>
                         </div>
                         <a id="btn-edit-name" href="" 
@@ -96,42 +94,29 @@
                       </div>
                     </li>
                   </ul>
-                </div>
               </div>
             </div>
-
           </div>
-
-      </div>
-
-      <div class="hidden-lg col-md-12">
-          <div class="panel panel-default">
-              <div class="panel-heading">
-                  <h3 class="panel-title">Generated Model</h3>
-              </div>
-              <div class="panel-body">
-                  <pre class="code">{{modelAsJson}}</pre>
-              </div>
-          </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="trash-area">
-    <div class="">
-      <h4><span class="glyphicon glyphicon-trash mr5"></span> Trash</h4>
-      <div ng-repeat="items in models.trashItems">
-            <ul class="cards">
-                <li class="card" ng-repeat="item in items">
-                    <p>{{item.label}}</p>
-                    <ul class="actions">
-                        <li><a href="#" ng-click="permanentlyDelete($index)"></a></li>
-                    </ul>
-                </li>
-            </ul>
         </div>
+        <div class="abs trash-area">
+          <div class="clearfix">
+            <h4 class="pull-left">Trash items</h4>
+          </div>
+          <div class="" ng-repeat="items in models.trashItems">
+            <div class="trash-cards col-md-2 col-sm-2 col-xs-6" ng-repeat="item in items">
+              <div class="clearfix">
+                {{item.label}} 
+                <button ng-click="purgeTrash($index)" class="pull-right btn btn-xs btn-danger">
+                  <span class="glyphicon glyphicon-fire mr5"></span> Purge
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-drag-and-drop-lists.min.js"></script>
     <script type="text/javascript" src="js/angular-route.min.js"></script>

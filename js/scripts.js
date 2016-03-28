@@ -1,41 +1,4 @@
-angular.module("rodelloApp", [ "dndLists" ]);
-angular.module("rodelloApp", [ "ngRoute" ]);
-angular.module("rodelloApp", [ "ngStorage" ]);
-
-/*angular.module("rodelloApp").controller("CardController", function($scope) {
-    // go boxes
-    $scope.models = {
-        selected: null,
-        lists: {"Backlog": [], "InProgress": [], "Done": []}
-    };
-    for (var i = 1; i <= 3; ++i) {
-        $scope.models.lists.Backlog.push({
-            label: "Item A" + i
-        });
-        $scope.models.lists.InProgress.push({
-            label: "Item B" + i
-        });
-        $scope.models.lists.Done.push({
-            label: "Item C" + i
-        });
-    }
-    $scope.addCard = function(columnName) {
-        // add new card to boxes
-        $scope.models.lists[columnName].push({
-            label: "Story #1"
-        });
-        
-    };
-
-    // Model to JSON for demo purpose
-    $scope.$watch('models', function(model) {
-        $scope.modelAsJson = angular.toJson(model, true);
-    }, true);
-
-});*/
-
-angular.module("rodelloApp", [ "dndLists", "ngStorage" ]);
-
+angular.module("rodelloApp", [ "dndLists", "ngStorage", "ngRoute" ]);
 angular.module("rodelloApp").controller("CardController", [ "$scope", "$localStorage", function($scope, $localStorage) {
     var listObjects = {
         Backlog: [],
@@ -56,8 +19,7 @@ angular.module("rodelloApp").controller("CardController", [ "$scope", "$localSto
     $scope.models = {
         selected: null,
         lists: $scope.$storage.lists,
-        trashItems: $scope.$storage.trashItems,
-        footerExpanded: false
+        trashItems: $scope.$storage.trashItems
     };
 
     // add new card to boxes + assign colors
@@ -75,9 +37,8 @@ angular.module("rodelloApp").controller("CardController", [ "$scope", "$localSto
         //If DIV is hidden it will be visible and vice versa.
         $scope.IsHidden = $scope.IsHidden ? false : true;
     };
-    $scope.changeColor = function (color, $index) {
-        items[$index].color = color;
-        console.log(items[$index].color);
+    $scope.changeColor = function (columnName, color, $index) {
+        $scope.models.lists[columnName][$index].color = color;
     };
 
     $scope.moveToTrash = function(columnName, label) {
@@ -94,7 +55,7 @@ angular.module("rodelloApp").controller("CardController", [ "$scope", "$localSto
         //remove item from the draggable list
         $scope.$storage.lists[columnName].splice(index, 1);
     };
-    $scope.permanentlyDelete = function(index) {
+    $scope.purgeTrash = function(index) {
         delete $scope.$storage.trashItems["items"].splice(index, 1);
     };
     $scope.putBack = function(index, item) {
