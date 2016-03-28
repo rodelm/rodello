@@ -1,5 +1,5 @@
 # rodelloApp
-This works just like Trello
+This works just like TrelloApp
 
 #Dependencies
 This app uses:
@@ -9,4 +9,5 @@ This app uses:
 - ngLocalStorage - https://github.com/gsklee/ngStorage
 
 #Improvement/s
+- Angular Tour is not working
 
