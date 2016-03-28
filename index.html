@@ -118,52 +118,41 @@
     </div>
   </div>
 
-  <!-- Tip Content -->
-    <ol id="joyRideTipContent">
-      <li data-id="tour1" data-text="Next" class="custom">
-        <h4>Backlog</h4>
-        <p>You can add Cards for your Backlog tasks here</p>
-      </li>
-      <li data-id="tour2" data-text="Next" class="custom">
-        <h4>Add New Cards</h4>
-        <p>Add a card that designates your tasks, You can drag and drop cards in order or priority</p>
-      </li>
-      <li data-id="tour3" data-text="Next" class="custom">
-        <h4>Clear Board</h4>
-        <p>You can clear all the cards in the board</p>
-      </li>
-      <li data-id="tour4" data-text="Next" class="custom">
-        <h4>Delete a card</h4>
-        <p>Once this card is deleted, this will be in your Trash Area</p>
-      </li>
-      <li data-id="tour5" data-text="Next" data-options="tipLocation:top;tipAnimation:fade">
-        <h4>Trash Area</h4>
-        <p>These are the cards deleted in from your Task Boards, click Purge to put it into oblivion</p>
-      </li>
-    </ol>
+  <tour step="currentStep" post-tour="postTourCallback()" post-step="postStepCallback()" tour-complete="tourCompleteCallback()">
+    <virtual-step
+      tourtip="Angular Tour allows you to give an interactive tour to showcase the features of your website."
+      tourtip-next-label="Learn more"
+      tourtip-placement="right"
+      tourtip-step="0"
+      tourtip-element="#e0"></virtual-step>
+    <virtual-step
+      tourtip="Angular tour has some cool features."
+      tourtip-placement="right"
+      tourtip-step="1"
+      tourtip-element="#e1"></virtual-step>
+    <virtual-step
+      tourtip="And is tested in all major browsers."
+      tourtip-next-label="Continue"
+      tourtip-placement="bottom"
+      tourtip-step="2"
+      tourtip-element="#e2"></virtual-step>
+    <virtual-step
+      tourtip="Thanks for reading. Head over to the github page for more info."
+      tourtip-next-label="Finish"
+      tourtip-placement="left"
+      tourtip-step="13"
+      tourtip-element="#e13"></virtual-step>
+  </tour>
+
   
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-drag-and-drop-lists.min.js"></script>
     <script type="text/javascript" src="js/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
-    <!-- app tour -->
+    <!-- for site tour only -->
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.joyride-2.1.js"></script>
-    <script>
-      $(window).load(function() {
-        $('#joyRideTipContent').joyride({
-          autoStart : true,
-          postStepCallback : function (index, tip) {
-          if (index == 2) {
-            $(this).joyride('set_li', false, 1);
-          }
-        },
-        modal:true,
-        expose: true
-        });
-      });
-    </script>
+    <script type="text/javascript" src="js/angular-tour-tpls.js"></script>
 
     
   </body>

@@ -1,4 +1,4 @@
-angular.module("rodelloApp", [ "dndLists", "ngStorage", "ngRoute" ]);
+angular.module("rodelloApp", [ "dndLists", "ngStorage", "ngRoute", "angular-tour" ]);
 angular.module("rodelloApp").controller("CardController", [ "$scope", "$localStorage", function($scope, $localStorage) {
     var listObjects = {
         Backlog: [],
@@ -23,17 +23,26 @@ angular.module("rodelloApp").controller("CardController", [ "$scope", "$localSto
     };
 
     // enable tour
-    angular.element(document).ready(function() {
-        if ($scope.$storage.tourStatus == true) {
-            var startTour = document.getElementById("joyRideTipContent");
-            startTour.joyride({
-                autoStart : true,
-                modal : true,
-                expose : true,
-                cookieMonster: true
-            });
+    /*var curStep = $cookies.get('myTour');
+    
+    if(typeof curStep === 'string')
+        curStep = parseInt(curStep);
+
+        $scope.currentStep = curStep || 0;
+
+        $scope.postTourCallback = function() {
+          console.log('tour closes');
+        };
+
+        $scope.tourCompleteCallback = function() {
+          console.log('tour completed');
         }
-    });
+
+        $scope.postStepCallback = function() {
+          console.log('Tour - Update Step', $scope.currentStep);
+          $cookies.put('myTour', $scope.currentStep);
+        };
+*/
 
     // add new card to boxes + assign colors
     $scope.color = "DarkBlue";
