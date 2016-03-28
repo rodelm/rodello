@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Rodello</title>
 
@@ -33,152 +32,104 @@
           </button>
           <a class="navbar-brand" href="#">Rodello</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <button type="submit" class="btn btn-success">Clear</button>
-          </form>
-        </div>
       </div>
     </nav>
-    <div class="boxes-wrap">
+
+    <div class="boxes-wrap row" ng-controller="CardController">
       <div class="container-fluid">
-        <div class="col-md-4 col-sm-4">
-          <div class="box" ng-controller="cardController">
-            <div class="box-header clearfix">
-              <h4>BACKLOG</h4>
-              <button ng-click="addBacklog()" class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
-            </div>
-            <div class="box-body clearfix">
-              <div class="connectedSortable" id="sortableLogs">
-                <div class="clearfix card-entry blue" 
-                  ng-repeat="card in backlogCards track by $index" 
-                  ng-mouseenter="showOptions = true" 
-                  ng-mouseleave="showOptions = false" 
-                  ng-style="cardColor">
-                  <p id="card-name" class="backlog-{{$index}}">{{ backlogCards[$index] }}</p>
-                  <div class="clearfix" ng-show="showEdit">
-                    <input type="text" class="pull-left backlog-input-{{ $index }}" ng-model="backlogCards[$index]" >
-                    <button id="btn-save" class="pull-right backlog-input-{{ $index }}" type="submit" ng-click="save($index); showEdit = false">
-                      <span class="glyphicon glyphicon-floppy-disk"></span>
-                    </button>  
-                  </div>
-                  <div class="pull-right options" ng-show="showOptions">
-                    <a id="btn-edit-name" href="" 
-                      ng-click="enableEditor($index); showEdit = true">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                    <div class="dropdown pl15">
-                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span class="glyphicon glyphicon-tasks"></span>
-                      </button>
-                      <ul class="dropdown-menu pull-right" id="select-color">
-                        <li class="blue" ng-click="cardColor={background:'#265a88'}"></li>
-                        <li class="green" ng-click="cardColor={background:'#419641'}"></li>
-                        <li class="yellow" ng-click="cardColor={background:'#eb9316'}"></li>
-                        <li class="red" ng-click="cardColor={background:'#c12e2a'}"></li>
-                      </ul>
-                    </div>
-                  </div>
+
+      <div class="col-md-12">
+          
+          <div class="clearfix">
+
+            <div ng-repeat="(listName, list) in models.lists"  class="col-md-4 col-sm-4 col-xs-12">
+              <div class="box">
+                <div class="box-header clearfix">
+                  <h4>{{ listName }}</h4>
+                  <button ng-click="addCard(listName)" class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                </div>
+                <div class="box-body clearfix">
+                  <ul dnd-list="list">
+                    <li class="card-entry blue" 
+                      ng-repeat="item in list"
+                      dnd-draggable="item"
+                      dnd-moved="list.splice($index, 1)"
+                      dnd-effect-allowed="move"
+                      dnd-selected="models.selected = item"
+                      ng-class="{'selected': models.selected === item}"
+                      ng-mouseenter="showOptions = true" 
+                      ng-mouseleave="showOptions = false" 
+                      style="background-color:{{item.color}}"
+                      ng-repeat="item in list | filter: query"
+
+                    >
+                      <p ng-hide="editorEnabled" id="card-name">{{item.label}}</p>
+                      <div class="clearfix" ng-show="editorEnabled">
+                        <input ng-model="item.label" type="text" class="pull-left">
+                        <button id="btn-save" ng-click="editorEnabled=!editorEnabled" class="pull-right" type="submit">
+                          <span class="glyphicon glyphicon-floppy-disk"></span>
+                        </button>
+                      </div>
+                      <div  class="pull-right options" ng-show="showOptions">
+                        <a id="btn-edit-name" href="" 
+                          ng-click="editorEnabled=!editorEnabled">
+                          <span ng-hide="editorEnabled" class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <div class="dropdown">
+                          <button ng-hide="editorEnabled" class="btn btn-default dropdown-toggle" type="button" 
+                            ng-click="colorEnabled=!colorEnabled"
+                          >
+                            <span class="glyphicon glyphicon-tasks"></span>
+                          </button>
+
+                          <ul class="dropdown-menu pull-right" id="select-color" 
+                            ng-model="item.color"
+                            ng-show="colorEnabled"
+                            ng-hide="showOptions"
+                          >
+                            <li><a ng-click="toggleBox()" href="" class="blue" value="blue" ng-model="item.color"></a></li>
+                            <li><a ng-click="toggleBox()" href="" class="green" value="green" ng-model="item.color"></a></li>
+                            <li><a ng-click="toggleBox()" href="" class="yellow" value="yellow" ng-model="item.color"></a></li>
+                            <li><a ng-click="toggleBox()" href="" class="red" value="red" ng-model="item.color"></a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
+
           </div>
-        </div>
-        <div class="col-md-4 col-sm-4">
-          <div class="box" ng-controller="cardController">
-            <div class="box-header clearfix">
-              <h4>IN PROGRESS</h4>
-              <button ng-click="addCard()" class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
-            </div>
-            <div class="box-body clearfix">
-              <div class="connectedSortable" id="sortableLogs">
-                <div class="clearfix card-entry blue" 
-                  ng-repeat="card in cards track by $index" ng-mouseenter="showOptions = true" ng-mouseleave="showOptions = false" ng-style="cardColor">
-                  <p id="card-name" ng-bind="cardTitle"></p>
-                  <div class="clearfix" id="edit-wrap" >
-                    <input type="text" class="pull-left" ng-model="cardTitle" >
-                    <button id="btn-save" class="pull-right" type="submit" ng-click="save()">
-                      <span class="glyphicon glyphicon-floppy-disk"></span>
-                    </button>  
-                  </div>
-                  <div class="pull-right options" ng-show="showOptions">
-                    <a id="btn-edit-name" href="" ng-click="enableEditor()">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                    <div class="dropdown pl15">
-                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span class="glyphicon glyphicon-tasks"></span>
-                      </button>
-                      <ul class="dropdown-menu pull-right" id="select-color">
-                        <li class="blue" ng-click="cardColor={background:'#265a88'}"></li>
-                        <li class="green" ng-click="cardColor={background:'#419641'}"></li>
-                        <li class="yellow" ng-click="cardColor={background:'#eb9316'}"></li>
-                        <li class="red" ng-click="cardColor={background:'#c12e2a'}"></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+
+      </div>
+
+      <div class="hidden-lg col-md-12">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h3 class="panel-title">Generated Model</h3>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4">
-          <div class="box" ng-controller="cardController">
-            <div class="box-header clearfix">
-              <h4>DONE</h4>
-              <button ng-click="addCard()" class="pull-right btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span></button>
-            </div>
-            <div class="box-body clearfix">
-              <div class="connectedSortable" id="sortableLogs">
-                <div class="clearfix card-entry blue" 
-                  ng-repeat="card in cards track by $index" ng-mouseenter="showOptions = true" ng-mouseleave="showOptions = false" ng-style="cardColor">
-                  <p id="card-name" ng-bind="cardTitle"></p>
-                  <div class="clearfix" id="edit-wrap" >
-                    <input type="text" class="pull-left" ng-model="cardTitle" >
-                    <button id="btn-save" class="pull-right" type="submit" ng-click="save()">
-                      <span class="glyphicon glyphicon-floppy-disk"></span>
-                    </button>  
-                  </div>
-                  <div class="pull-right options" ng-show="showOptions">
-                    <a id="btn-edit-name" href="" ng-click="enableEditor()">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                    <div class="dropdown pl15">
-                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span class="glyphicon glyphicon-tasks"></span>
-                      </button>
-                      <ul class="dropdown-menu pull-right" id="select-color">
-                        <li class="blue" ng-click="cardColor={background:'#265a88'}"></li>
-                        <li class="green" ng-click="cardColor={background:'#419641'}"></li>
-                        <li class="yellow" ng-click="cardColor={background:'#eb9316'}"></li>
-                        <li class="red" ng-click="cardColor={background:'#c12e2a'}"></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+              <div class="panel-body">
+                  <pre class="code">{{modelAsJson}}</pre>
               </div>
-            </div>
           </div>
-        </div>
       </div>
     </div>
+  </div>
 
     <!-- <div class="trash-area">
       <div class="">
           <h4>Trash</h4>
       </div>
     </div> -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-drag-and-drop-lists.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <!-- jquery is added for the purpose of dropdown buttons only -->
     <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
     
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
