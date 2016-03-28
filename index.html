@@ -39,9 +39,7 @@
       <div class="container-fluid">
 
       <div class="col-md-12">
-          
           <div class="clearfix">
-
             <div ng-repeat="(listName, list) in models.lists"  class="col-md-4 col-sm-4 col-xs-12">
               <div class="box">
                 <div class="box-header clearfix">
@@ -91,6 +89,7 @@
                           </ul>
                         </div>
                         <a id="btn-edit-name" href="" 
+                          ng-hide="editorEnabled"
                           ng-click="moveToTrash(listName, item, $index)">
                           <span class="glyphicon glyphicon-trash"></span>
                         </a>
@@ -120,9 +119,7 @@
 
   <div class="trash-area">
     <div class="">
-      <h4>Trash</h4>
-      
-      
+      <h4><span class="glyphicon glyphicon-trash mr5"></span> Trash</h4>
       <div ng-repeat="items in models.trashItems">
             <ul class="cards">
                 <li class="card" ng-repeat="item in items">
